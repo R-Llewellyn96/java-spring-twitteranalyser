@@ -25,7 +25,7 @@ public class UserController {
     }
 
     @GetMapping("/users/{id}")
-    public ResponseEntity<User> getEmployeeById(@PathVariable(value = "id") Long twitter_id)
+    public ResponseEntity<User> getUserByTwitterId(@PathVariable(value = "id") Long twitter_id)
             throws ResourceNotFoundException {
         User user = userRepository.findById(twitter_id)
                 .orElseThrow(() -> new ResourceNotFoundException("User not found for this twitter id :: " + twitter_id));
@@ -38,7 +38,7 @@ public class UserController {
     }
 
     @PutMapping("/users/{id}")
-    public ResponseEntity<User> updateEmployee(@PathVariable(value = "id") Long twitter_id,
+    public ResponseEntity<User> updateUser(@PathVariable(value = "id") Long twitter_id,
                                                @Valid @RequestBody User userDetails) throws ResourceNotFoundException {
         User user = userRepository
                 .findById(twitter_id)

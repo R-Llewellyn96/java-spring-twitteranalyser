@@ -11,13 +11,29 @@ import javax.persistence.*;
 @Table(name = "tweetwsentimentdb")
 public class TweetWSentimentDB {
 
+    @Id
+    @GeneratedValue(strategy = GenerationType.IDENTITY)
     public Long db_id;
+
+    @Column(name = "user_id", nullable = false)
     public Long user_id;
+
+    @Column(name = "tweet_id", nullable = false, unique = true)
     public Long tweet_id;
+
+    @Column(name = "created_at", nullable = false)
     public String created_at;
+
+    @Column(name = "username", nullable = false)
     public String username;
+
+    @Column(name = "display_name", nullable = false)
     public String display_name;
+
+    @Column(name = "tweet_text", nullable = false)
     public String tweet_text;
+
+    @Column(name = "sentiment_score", nullable = false)
     public String sentiment_score;
 
     public TweetWSentimentDB(Long user_id, Long tweet_id, String created_at, String username, String display_name, String tweet_text, String sentiment_score) {
@@ -37,9 +53,15 @@ public class TweetWSentimentDB {
     public Long getDb_id() { return db_id; }
     public void setDb_id(Long db_id) { this.db_id = db_id; }
 
-    @OneToOne(cascade = CascadeType.ALL)
+    @ManyToOne(cascade = CascadeType.ALL)
+    @JoinColumn(name="user_id", referencedColumnName = "twitter_id")
+    private User user;
+
+    /*
+    @OneToOne(cascade = CascadeType.REMOVE)
     @JoinColumn(name = "user_id", referencedColumnName = "twitter_id")
     private User user;
+*/
 
     @Column(name = "user_id", nullable = false)
     public Long getUser_id() { return user_id; }

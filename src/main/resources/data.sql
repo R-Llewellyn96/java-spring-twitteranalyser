@@ -1,7 +1,8 @@
 DROP TABLE IF EXISTS usertb, tweetwsentimentdb;
 
 CREATE TABLE usertb (
-    twitter_id INT PRIMARY KEY
+    id INT AUTO_INCREMENT PRIMARY KEY,
+    twitter_id INT NOT NULL UNIQUE
 );
 
 CREATE TABLE tweetwsentimentdb (
@@ -21,6 +22,6 @@ INSERT INTO usertb (twitter_id) VALUES
 (789);
 
 INSERT INTO tweetwsentimentdb (user_id, tweet_id, created_at, username, display_name, tweet_text, sentiment_score) VALUES
-(123, 1, '2021-05-10', 'testuser', 'tester', 'this is a test tweet', '2'),
-(123, 2, '2021-05-10', 'testuser2', 'tester2', 'this is a test tweet2', '2'),
-(123, 3, '2021-05-10', 'testuser2', 'tester2', 'this is a test tweet2', '2');
+(123, 4567, '2021-05-10', 'testuser', 'tester', 'this is a test tweet', '2'),
+(123, 5666, '2021-05-10', 'testuser2', 'tester2', 'this is a test tweet2', '2'),
+(456, 5789, '2021-05-10', 'testuser2', 'tester2', 'this is a test tweet2', '2');

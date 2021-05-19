@@ -22,12 +22,27 @@ public class TweetWSentimentDBController {
     @GetMapping("/tweets")
     public List<TweetWSentimentDB> getAllTweets() { return tweetWSentimentDBRepository.findAll(); }
 
-    @GetMapping("/tweets/user/{id}")
-    public ResponseEntity<TweetWSentimentDB> getTweetsById(@PathVariable(value = "id") Long user_id)
+    @GetMapping("/tweets/{id}")
+    public ResponseEntity<TweetWSentimentDB> getTweetById(@PathVariable(value = "id") Long tweet_id)
             throws ResourceNotFoundException {
-        TweetWSentimentDB tweet = tweetWSentimentDBRepository.findById(user_id)
-                .orElseThrow(() -> new ResourceNotFoundException("Tweets not found for this id :: " + user_id));
+        TweetWSentimentDB tweet = tweetWSentimentDBRepository.findTweetWSentimentDBByTweet_id(tweet_id)
+                .orElseThrow(() -> new ResourceNotFoundException("Tweet not found for this id :: " + tweet_id));
         return ResponseEntity.ok().body(tweet);
+    }
+
+    @GetMapping("/tweets/user/{id}")
+    public List<TweetWSentimentDB> getTweetsByUserId(@PathVariable(value = "id") Long user_id)
+            throws ResourceNotFoundException {
+        try {
+            List<TweetWSentimentDB> tweetList = tweetWSentimentDBRepository.findAllByUser_id(user_id);
+            if (!tweetList.isEmpty()) {
+            return tweetList;
+            } else {
+                throw new ResourceNotFoundException("Tweets not found for this id :: " + user_id);
+            }
+        }catch (Exception e) {
+            throw new ResourceNotFoundException("Tweets not found for this id :: " + user_id);
+        }
     }
 
     @PostMapping("/tweets")
@@ -39,11 +54,11 @@ public class TweetWSentimentDBController {
     public ResponseEntity<TweetWSentimentDB> updateTweet(@PathVariable(value = "id") Long tweet_id,
                                            @Valid @RequestBody TweetWSentimentDB tweetDetails) throws ResourceNotFoundException {
         TweetWSentimentDB tweet = tweetWSentimentDBRepository
-                .findById(tweet_id)
+                .findTweetWSentimentDBByTweet_id(tweet_id)
                 .orElseThrow(() -> new ResourceNotFoundException("Tweet not found for this id :: " + tweet_id));
 
         tweet.setUser_id(tweetDetails.getUser_id());
-        tweet.setTweet_id(tweet_id);
+        tweet.setTweet_id(tweetDetails.getTweet_id());
         tweet.setCreated_at(tweetDetails.getCreated_at());
         tweet.setUsername(tweetDetails.getUsername());
         tweet.setDisplay_name(tweetDetails.getDisplay_name());
@@ -56,7 +71,7 @@ public class TweetWSentimentDBController {
     @DeleteMapping("/tweets/{id}")
     public Map<String, Boolean> deleteTweet(@PathVariable(value = "id") Long tweet_id)
             throws ResourceNotFoundException {
-        TweetWSentimentDB tweet = tweetWSentimentDBRepository.findById(tweet_id)
+        TweetWSentimentDB tweet = tweetWSentimentDBRepository.findTweetWSentimentDBByTweet_id(tweet_id)
                 .orElseThrow(() -> new ResourceNotFoundException("Tweets not found for this tweet id :: " + tweet_id));
 
         tweetWSentimentDBRepository.delete(tweet);
