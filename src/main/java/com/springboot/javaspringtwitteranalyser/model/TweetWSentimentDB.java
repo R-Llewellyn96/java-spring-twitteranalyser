@@ -57,12 +57,6 @@ public class TweetWSentimentDB {
     @JoinColumn(name="user_id", referencedColumnName = "twitter_id")
     private User user;
 
-    /*
-    @OneToOne(cascade = CascadeType.REMOVE)
-    @JoinColumn(name = "user_id", referencedColumnName = "twitter_id")
-    private User user;
-*/
-
     @Column(name = "user_id", nullable = false)
     public Long getUser_id() { return user_id; }
     public void setUser_id(Long user_id) { this.user_id = user_id; }

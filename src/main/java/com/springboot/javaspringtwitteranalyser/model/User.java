@@ -13,17 +13,10 @@ import java.util.List;
 @Table(name = "usertb")
 public class User {
 
-    /*
-    @Id
-    @Column(name = "id")
-    public Long id;
-*/
-
     @Id
     public Long twitter_id;
 
     public User(Long twitter_id) {
-        //this.id = id;
         this.twitter_id = twitter_id;
     }
 
@@ -32,15 +25,6 @@ public class User {
     @OneToMany(mappedBy = "usertb")
     private List<TweetWSentimentDB> tweetWSentimentDB;
 
-    /*
-    @Id
-    @GeneratedValue(strategy=GenerationType.IDENTITY)
-    @Column(name = "id", nullable = false)
-    public Long getId() { return id; }
-    public void setId(Long id) { this.id = id; }
-
-
-     */
     @Id
     @Column(name = "twitter_id", nullable = false, unique = true)
     public Long getTwitter_id() { return twitter_id; }
