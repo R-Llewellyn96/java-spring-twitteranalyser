@@ -12,6 +12,11 @@ import java.util.HashMap;
 import java.util.List;
 import java.util.Map;
 
+/**
+ * Rest API Controller for users.
+ *
+ * @author Ryan Llewellyn
+ */
 @RestController
 @RequestMapping("/api/v1")
 public class UserController {
@@ -27,8 +32,10 @@ public class UserController {
     @GetMapping("/users/{id}")
     public ResponseEntity<User> getUserByTwitterId(@PathVariable(value = "id") Long twitter_id)
             throws ResourceNotFoundException {
+
         User user = userRepository.findById(twitter_id)
                 .orElseThrow(() -> new ResourceNotFoundException("User not found for this twitter id :: " + twitter_id));
+
         return ResponseEntity.ok().body(user);
     }
 

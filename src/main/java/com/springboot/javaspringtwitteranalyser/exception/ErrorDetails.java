@@ -2,6 +2,11 @@ package com.springboot.javaspringtwitteranalyser.exception;
 
 import java.util.Date;
 
+/**
+ * Class to print out error details to postman for debugging.
+ *
+ * @author Ryan Llewellyn
+ */
 public class ErrorDetails {
     private Date timestamp;
     private String message;

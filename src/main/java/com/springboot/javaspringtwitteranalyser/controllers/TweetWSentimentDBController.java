@@ -12,6 +12,11 @@ import java.util.HashMap;
 import java.util.List;
 import java.util.Map;
 
+/**
+ * Rest API Controller for Tweets.
+ *
+ * @author Ryan Llewellyn
+ */
 @RestController
 @RequestMapping("/api/v1")
 public class TweetWSentimentDBController {
@@ -34,7 +39,7 @@ public class TweetWSentimentDBController {
     public List<TweetWSentimentDB> getTweetsByUserId(@PathVariable(value = "id") Long user_id)
             throws ResourceNotFoundException {
         try {
-            List<TweetWSentimentDB> tweetList = tweetWSentimentDBRepository.findAllByUser_id(user_id);
+            final List<TweetWSentimentDB> tweetList = tweetWSentimentDBRepository.findAllByUser_id(user_id);
             if (!tweetList.isEmpty()) {
             return tweetList;
             } else {

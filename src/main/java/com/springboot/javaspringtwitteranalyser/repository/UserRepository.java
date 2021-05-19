@@ -9,6 +9,8 @@ import java.util.Optional;
 
 /**
  * Repository Interface for User DB Entries
+ *
+ * @author Ryan Llewellyn
  */
 @Repository
 public interface UserRepository extends JpaRepository<User,Long> {

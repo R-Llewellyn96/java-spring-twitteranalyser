@@ -8,6 +8,9 @@ import org.springframework.web.context.request.WebRequest;
 
 import java.util.Date;
 
+/**
+ * Handle any internal server exceptions and throw them to a response entity for debugging in postman.
+ */
 @ControllerAdvice
 public class GlobalExceptionHandler {
     @ExceptionHandler(ResourceNotFoundException.class)

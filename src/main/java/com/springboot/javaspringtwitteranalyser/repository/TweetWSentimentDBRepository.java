@@ -11,6 +11,8 @@ import java.util.Optional;
 
 /**
  * Repository Interface for TweetWSentimentDB Entries
+ *
+ * @author Ryan Llewellyn
  */
 @Repository
 public interface TweetWSentimentDBRepository extends JpaRepository<TweetWSentimentDB, Long> {
