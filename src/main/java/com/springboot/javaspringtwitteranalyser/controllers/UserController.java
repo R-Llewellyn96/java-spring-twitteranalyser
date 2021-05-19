@@ -44,6 +44,7 @@ public class UserController {
         return userRepository.save(user);
     }
 
+    /* Preserve Twitter ID, dont allow for change
     @PutMapping("/users/{id}")
     public ResponseEntity<User> updateUser(@PathVariable(value = "id") Long twitter_id,
                                                @Valid @RequestBody User userDetails) throws ResourceNotFoundException {
@@ -55,6 +56,7 @@ public class UserController {
         final User updatedUser = userRepository.save(user);
         return ResponseEntity.ok(updatedUser);
     }
+     */
 
     @DeleteMapping("/users/{id}")
     public Map<String, Boolean> deleteUser(@PathVariable(value = "id") Long twitter_id)
